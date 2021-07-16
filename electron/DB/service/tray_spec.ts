@@ -17,6 +17,7 @@ class TraySpecService implements TraySpecRepo {
 
     async getDatas(cid: string): Promise<Array<ITraySpec>> {
         return traySpec.findAll({
+            raw: true,
             where: {
                 custId: cid
             }

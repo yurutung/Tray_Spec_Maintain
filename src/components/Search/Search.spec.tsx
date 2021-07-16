@@ -1,6 +1,6 @@
-import { render } from '@testing-library/react'
+// import { render } from '@testing-library/react'
 
-import { Search } from './index'
+// import { Search } from './index'
 
 // test('Greetings should renders', () => {
 //   const { getByText, getByAltText } = render(<Greetings />)

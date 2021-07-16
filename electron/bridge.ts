@@ -9,20 +9,17 @@ export const api = {
    * The function below can accessed using `window.Main.sayHello`
    */
 
-  sendMessage: (message: string) => { 
-    ipcRenderer.send('message', message)
-  },
-
-  getData: (id: string) => {
-    ipcRenderer.send('data', id)
+  getData: (mode: string, id: string) => {
+    ipcRenderer.send('getData', mode, id)
   },
 
   /**
    * Provide an easier way to listen to events
    */
   on: (channel: string, callback: Function) => {
-    ipcRenderer.on(channel, (_, data) => callback(data))
-  }
+    ipcRenderer.once(channel, (_, data) => callback(data))
+  },
+
 }
 
 contextBridge.exposeInMainWorld('Main', api)

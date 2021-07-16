@@ -12,3 +12,7 @@
     ```powershell
     npm run start
     ```
+
+
+* how to enum?
+    tray_spec、tray_msl

@@ -1,7 +1,7 @@
 import { establishConnection } from './plugins/mariadb'
 import * as models from './models'
-import { TraySpecService } from './service/tray_spec'
+import * as services from './service'
 
 // establishConnection()
 
-export {establishConnection, models, TraySpecService}
+export { establishConnection, models, services }

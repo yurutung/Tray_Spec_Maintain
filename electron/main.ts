@@ -5,14 +5,14 @@ let mainWindow: BrowserWindow | null
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string
 
-import { establishConnection, TraySpecService } from './DB'
+import { establishConnection, services } from './DB'
 
 // const assetsPath =
 //   process.env.NODE_ENV === 'production'
 //     ? process.resourcesPath
 //     : app.getAppPath()
 
-function createWindow () {
+function createWindow() {
 
   mainWindow = new BrowserWindow({
     // icon: path.join(assetsPath, 'assets', 'icon.png'),
@@ -35,25 +35,28 @@ function createWindow () {
   })
 }
 
-async function registerListeners () {
+async function registerListeners() {
   // connect db
   establishConnection()
-  const service = TraySpecService.of()
-  
+  const tsService = services.TraySpecService.of()
+  const tmService = services.TrayMslService.of()
+
   /**
    * This comes from bridge integration, check bridge.ts
    */
-  ipcMain.on('message', (_, message) => {
-    console.log(message)
-    _.reply('send', '傳過去啦!!!')
-  })
-
-  ipcMain.on('data', (_, id) => {
+  ipcMain.on('getData', (_, mode, id) => {
     console.log(id)
-    service.getDatas(id).then(e => {
-      console.log(e)
-      _.reply('send', e)
-    })
+    // TODO: define tray_spec, tray_msl
+    if (mode == 'tray_spec') {
+      tsService.getDatas(id).then(e => {
+        _.reply('send', e)
+      })
+    } else if (mode == 'tray_msl') {
+      tmService.getDatas(id).then(e => {
+        _.reply('send', e)
+      })
+    }
+
   })
 }
 
