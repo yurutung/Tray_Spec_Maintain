@@ -5,7 +5,7 @@ let mainWindow: BrowserWindow | null
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string
 
-import { establishConnection, services } from './DB'
+import { establishConnection, services } from '../DB'
 
 // const assetsPath =
 //   process.env.NODE_ENV === 'production'
@@ -48,12 +48,12 @@ async function registerListeners() {
     console.log(id)
     // TODO: define tray_spec, tray_msl
     if (mode == 'tray_spec') {
-      tsService.getDatas(id).then(e => {
-        _.reply('send', e)
+      tsService.getDatas(id).then(data => {
+        _.returnValue = data
       })
     } else if (mode == 'tray_msl') {
-      tmService.getDatas(id).then(e => {
-        _.reply('send', e)
+      tmService.getDatas(id).then(data => {
+        _.returnValue = data
       })
     }
 

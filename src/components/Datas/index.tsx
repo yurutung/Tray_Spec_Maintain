@@ -1,17 +1,27 @@
 import { Link, RouteComponentProps, useHistory } from "react-router-dom"
+import React, { useEffect, useState } from 'react'
+import BootstrapTable from "react-bootstrap-table-next"
+import { ITraySpec } from "../../../DB/types/tray_spec"
+import { ITrayMsl } from "../../../DB/types/tray_msl"
+
 
 export function Datas({ match }: RouteComponentProps<{ mode: string, id: string }>) {
-
-  console.log(match.params)
-
+  // params
+  // console.log(match.params)
   const mode = match.params.mode
   const id = match.params.id
-
-  function test(e: []) {
-    console.log(e)
+  // datas
+  // const [datas, setDatas] = useState<ITraySpec[] | ITrayMsl[]>([])
+  let datas: Array<ITraySpec | ITrayMsl> = []
+  useEffect(() => {
+    fetchDatas()
+  }, [])
+  const fetchDatas = (): void => {
+    window.Main.getData(mode, id).then(d => {
+      datas = d
+      console.log(datas)
+    })
   }
-
-  window.Main.on('send', test)
 
   return (
     <div>

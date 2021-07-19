@@ -17,7 +17,6 @@ export function Search({ match }: RouteComponentProps<{ mode: string }>) {
         // TODO: define tray_spec, tray_msl
         // TODO: mode in ['tray_spec', 'tray_msl']
         if (['tray_spec', 'tray_msl'].includes(mode)) {
-            window.Main.getData(mode, id)
             history.push(`/datas/${mode}/${id}`)
         }
     }

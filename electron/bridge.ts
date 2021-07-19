@@ -1,4 +1,6 @@
 import { contextBridge, ipcRenderer } from 'electron'
+import { ITraySpec } from "../DB/types/tray_spec"
+import { ITrayMsl } from "../DB/types/tray_msl"
 
 export const api = {
   /**
@@ -9,8 +11,8 @@ export const api = {
    * The function below can accessed using `window.Main.sayHello`
    */
 
-  getData: (mode: string, id: string) => {
-    ipcRenderer.send('getData', mode, id)
+  getData: async (mode: string, id: string): Promise<ITraySpec[] | ITrayMsl[]> => {
+    return await ipcRenderer.sendSync('getData', mode, id)
   },
 
   /**
