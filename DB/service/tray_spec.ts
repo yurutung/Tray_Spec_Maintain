@@ -28,7 +28,7 @@ class TraySpecService implements TraySpecRepo {
     }
 
     async addData(traySpecBody: ITraySpec): Promise<ITraySpec> {
-        return traySpec.create(traySpecBody, {isNewRecord: true})
+        return traySpec.create(traySpecBody)
     }
 
     async updateData(traySpecBody: ITraySpec): Promise<[number, traySpec[]] | null> {
