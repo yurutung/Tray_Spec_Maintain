@@ -21,3 +21,13 @@
 //     margin-top: 24px;
 //   }
 // `
+
+// export const Image = styled.img`
+//   width: 240px;
+//   animation: ${rotate} 15s linear infinite;
+// `
+
+// export const Text = styled.p`
+//   margin-top: 24px;
+//   font-size: 18px;
+// `

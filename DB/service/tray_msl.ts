@@ -1,5 +1,6 @@
 import { trayMsl } from '../models';
 import { ITrayMsl } from '../types/tray_msl'
+import { Op } from 'sequelize'
 
 interface TrayMslRepo {
     getDatas(mid: string): Promise<Array<ITrayMsl>>
@@ -19,7 +20,9 @@ class TrayMslService implements TrayMslRepo {
         return trayMsl.findAll({
             raw: true,
             where: {
-                msl: mid
+                msl: {
+                    [Op.like]: mid.replaceAll('*', '%')
+                }
             }
         })
     }

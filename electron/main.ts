@@ -44,19 +44,58 @@ async function registerListeners() {
   /**
    * This comes from bridge integration, check bridge.ts
    */
-  ipcMain.on('getData', (_, mode, id) => {
-    console.log(id)
+  // get datas
+  ipcMain.on('getData', async (_, mode, id) => {
     // TODO: define tray_spec, tray_msl
-    if (mode == 'tray_spec') {
-      tsService.getDatas(id).then(data => {
-        _.returnValue = data
-      })
-    } else if (mode == 'tray_msl') {
-      tmService.getDatas(id).then(data => {
-        _.returnValue = data
-      })
+    try {
+      if (mode == 'tray_spec') {
+        _.returnValue = {
+          status: 200,
+          data: await tsService.getDatas(id)
+        }
+      } else if (mode == 'tray_msl') {
+        _.returnValue = {
+          status: 200,
+          data: await tmService.getDatas(id)
+        }
+      }
+    } catch (error) {
+      console.error(`getData/${mode}/${id} Error: ${error}`)
+      _.returnValue = {
+        status: 500,
+        data: `getData/${mode}/${id} Error: ${error}`
+      }
     }
-
+  })
+  // add tray spec data
+  ipcMain.on('addTraySpecData', async (_, data) => {
+    try {
+      _.returnValue = {
+        status: 201,
+        data: await tsService.addData(data)
+      }
+    } catch (error) {
+      console.error(`addTraySpecData Error: ${error}`)
+      _.returnValue = {
+        status: 500,
+        data: `addTraySpecData Error: ${error}`
+      }
+    }
+  })
+  // add tray msl data
+  ipcMain.on('addTrayMslData', async (_, data) => {
+    try {
+      _.returnValue = {
+        status: 201,
+        data: await tmService.addData(data)
+      }
+    } catch (error) {
+      console.error(`addTrayMslData Error: ${error}`)
+      _.returnValue = {
+        status: 500,
+        data: `addTrayMslData Error: ${error}`
+      }
+    }
   })
 }
 

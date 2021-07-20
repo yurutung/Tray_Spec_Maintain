@@ -11,7 +11,7 @@ import { ITraySpec } from '../types/tray_spec'
 class traySpec extends Model<ITraySpec, ITraySpec> implements ITraySpec {
 
     @Column({
-    	field: "CUST_ID",
+    	field: "CUST_CD",
     	primaryKey: true,
     	type: DataType.STRING(64) 
     })
@@ -21,7 +21,7 @@ class traySpec extends Model<ITraySpec, ITraySpec> implements ITraySpec {
     	order: "ASC",
     	unique: true 
     })
-    custId!: string;
+    custCd!: string;
 
     @Column({
     	field: "PRODSPEC_ID",
@@ -136,7 +136,8 @@ class traySpec extends Model<ITraySpec, ITraySpec> implements ITraySpec {
 
     @Column({
     	field: "DATECODE_LIMIT",
-    	type: DataType.INTEGER 
+    	type: DataType.INTEGER,
+		defaultValue: 9999
     })
     datecodeLimit!: number;
 

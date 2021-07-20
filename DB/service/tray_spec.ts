@@ -1,5 +1,6 @@
 import { traySpec } from '../models';
 import { ITraySpec } from '../types/tray_spec'
+import { Op } from 'sequelize'
 
 interface TraySpecRepo {
     getDatas(cid: string): Promise<Array<ITraySpec>>
@@ -19,19 +20,21 @@ class TraySpecService implements TraySpecRepo {
         return traySpec.findAll({
             raw: true,
             where: {
-                custId: cid
+                custCd: {
+                    [Op.like]: cid.replaceAll('*', '%')
+                }
             }
         })
     }
 
     async addData(traySpecBody: ITraySpec): Promise<ITraySpec> {
-        return traySpec.create(traySpecBody)
+        return traySpec.create(traySpecBody, {isNewRecord: true})
     }
 
     async updateData(traySpecBody: ITraySpec): Promise<[number, traySpec[]] | null> {
         return traySpec.update(traySpecBody, {
             where: {
-                custId: traySpecBody.custId,
+                custCd: traySpecBody.custCd,
                 prodspecId: traySpecBody.prodspecId
             }
         })
@@ -40,7 +43,7 @@ class TraySpecService implements TraySpecRepo {
     async deleteData(traySpecBody: ITraySpec): Promise<number | null> {
         return traySpec.destroy({
             where: {
-                custId: traySpecBody.custId,
+                custCd: traySpecBody.custCd,
                 prodspecId: traySpecBody.prodspecId
             }
         })
