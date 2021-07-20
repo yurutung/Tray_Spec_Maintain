@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, forwardRef, useImperativeHandle } from 'react'
 import { ITraySpec } from "../../../DB/types/tray_spec"
 
 import BootstrapTable, { SelectRowProps } from "react-bootstrap-table-next"
 
-const TraySpecTable = (props: {mode: string, id: string}) => {
+const TraySpecTable = forwardRef((props: {mode: string, id: string}, ref) => {
+  // props
   const mode = props.mode
   const id = props.id
+  // table data
   const [datas, setDatas] = useState<ITraySpec[]>([])
   useEffect(() => {
     fetchDatas()
@@ -18,6 +20,24 @@ const TraySpecTable = (props: {mode: string, id: string}) => {
       })
       .catch(err => console.log(err))
   }
+
+  // select row
+  const [selected, setSelected] = useState<ITraySpec[]>([])
+  const handleOnSelect = (row, isSelect) => {
+    if (isSelect) {
+      setSelected(row)
+    }
+  }
+  // get select and send to update page
+  useImperativeHandle(
+    ref,
+    () => ({
+      updateSelected() {
+        console.log("tsRef")
+        console.log(selected)
+      }
+    }),
+  )
 
   const columns = [
     {
@@ -103,12 +123,13 @@ const TraySpecTable = (props: {mode: string, id: string}) => {
   const selectRow: SelectRowProps<any> = {
     mode: 'radio',
     clickToSelect: true,
-    style: { backgroundColor: '#c8e6c9' }
+    style: { backgroundColor: '#c8e6c9' },
+    onSelect: handleOnSelect,
   }
 
   return (
     <BootstrapTable keyField="id" data={datas} columns={columns} selectRow={selectRow}/>
   )
-}
+})
 
 export default TraySpecTable
