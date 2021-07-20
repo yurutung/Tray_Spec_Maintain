@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { ITraySpec } from '../../../DB/types/tray_spec'
 import { Link, RouteComponentProps, useHistory } from "react-router-dom"
 
-export function AddTraySpec() {
+const AddTraySpec = ({ match }: RouteComponentProps<{ mode: string }>) => {
+  const mode = match.params.mode
   
   const [formData, setFormData] = useState<ITraySpec | {}>()
 

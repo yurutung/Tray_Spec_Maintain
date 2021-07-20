@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-export function Home() {
+const Home = () => {
 
     return (
         <div className="container h-100">

@@ -2,9 +2,12 @@ import React, { useState } from 'react'
 import { ITraySpec } from '../../../DB/types/tray_spec'
 import { Link, RouteComponentProps, useHistory } from "react-router-dom"
 
-export function AddTrayMsl() {
-  
-  const [formData, setFormData] = useState<ITraySpec | {}>()
+const AddTrayMsl = () => {
+  // export function AddTrayMsl(props: {location: {state: {id: string}}}) {
+  // console.log(props.location.state.id)
+  // console.log(props)
+
+  const [formData, setFormData] = useState<ITraySpec | {}>({})
 
   const handleForm = (e: React.FormEvent<HTMLInputElement>): void => {
     setFormData({
@@ -16,7 +19,7 @@ export function AddTrayMsl() {
   const saveTraySpec = (e: React.FormEvent, formData: ITraySpec | any): void => {
     e.preventDefault()
     console.log(formData)
-    
+
     window.Main.addTrayMslData(formData)
       .then(e => console.log(e))
       .catch(err => console.log(err))

@@ -3,7 +3,7 @@ import { ITraySpec } from "../../../DB/types/tray_spec"
 
 import BootstrapTable, { SelectRowProps } from "react-bootstrap-table-next"
 
-export function TraySpecTable(props: {mode: string, id: string}) {
+const TraySpecTable = (props: {mode: string, id: string}) => {
   const mode = props.mode
   const id = props.id
   const [datas, setDatas] = useState<ITraySpec[]>([])

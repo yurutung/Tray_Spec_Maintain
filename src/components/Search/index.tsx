@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, RouteComponentProps, useHistory } from "react-router-dom"
 
-export function Search({ match }: RouteComponentProps<{ mode: string }>) {
+const Search = ({ match }: RouteComponentProps<{ mode: string }>) => {
     const mode: string = match.params.mode
     const history = useHistory()
 

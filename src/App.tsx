@@ -7,7 +7,7 @@ import Datas from './components/Datas'
 import AddTraySpec from './components/AddTraySpec'
 import AddTrayMsl from './components/AddTrayMsl'
 
-export function App() {
+export const App = () => {
 
   return (
     <>
