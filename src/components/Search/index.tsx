@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Link, RouteComponentProps, useHistory } from "react-router-dom"
+import { Link, RouteComponentProps, useHistory, useParams } from "react-router-dom"
 
-const Search = ({ match }: RouteComponentProps<{ mode: string }>) => {
-    const mode: string = match.params.mode
+const Search = () => {
+    const { mode } = useParams<{mode: string}>()
+    // const mode: string = match.params.mode
     const history = useHistory()
 
     const [id, setId] = useState('')

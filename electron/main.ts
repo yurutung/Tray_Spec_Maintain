@@ -7,11 +7,6 @@ declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string
 
 import { establishConnection, services } from '../DB'
 
-// const assetsPath =
-//   process.env.NODE_ENV === 'production'
-//     ? process.resourcesPath
-//     : app.getAppPath()
-
 function createWindow() {
 
   mainWindow = new BrowserWindow({
@@ -48,6 +43,7 @@ async function registerListeners() {
   ipcMain.on('getData', async (_, mode, id) => {
     // TODO: define tray_spec, tray_msl
     try {
+      // TODO: catch之後throw error會有UnhandlePromise的error，不知道怎麼解好，所以先用status判斷
       if (mode == 'tray_spec') {
         _.returnValue = {
           status: 200,
@@ -69,6 +65,7 @@ async function registerListeners() {
   })
   // add tray spec data
   ipcMain.on('addTraySpecData', async (_, data) => {
+    // TODO: catch之後throw error會有UnhandlePromise的error，不知道怎麼解好，所以先用status判斷
     try {
       _.returnValue = {
         status: 201,
@@ -84,6 +81,7 @@ async function registerListeners() {
   })
   // add tray msl data
   ipcMain.on('addTrayMslData', async (_, data) => {
+    // TODO: catch之後throw error會有UnhandlePromise的error，不知道怎麼解好，所以先用status判斷
     try {
       _.returnValue = {
         status: 201,

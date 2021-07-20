@@ -1,14 +1,12 @@
 import { useRef } from "react"
-import { Link, RouteComponentProps, useHistory } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 import TrayMslTable from "../TrayMslTable"
 import TraySpecTable from "../TraySpecTable"
 
-const Datas = ({ match }: RouteComponentProps<{ mode: string, id: string }>) => {
+const Datas = () => {
   // params
-  // console.log(match.params)
-  const mode = match.params.mode
-  const id = match.params.id
+  const { mode, id } = useParams<{mode: string, id: string}>()
 
   const tsRef = useRef()
   const tmRef = useRef()
