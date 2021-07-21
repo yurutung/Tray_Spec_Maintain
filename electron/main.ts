@@ -95,6 +95,38 @@ async function registerListeners() {
       }
     }
   })
+  // edit tray msl data
+  ipcMain.on('editTraySpecData', async (_, data) => {
+    // TODO: catch之後throw error會有UnhandlePromise的error，不知道怎麼解好，所以先用status判斷
+    try {
+      _.returnValue = {
+        status: 200,
+        data: await tsService.updateData(data)
+      }
+    } catch (error) {
+      console.error(`editTraySpecData Error: ${error}`)
+      _.returnValue = {
+        status: 404,
+        data: `editTraySpecData Error: ${error}`
+      }
+    }
+  })
+  // edit tray msl data
+  ipcMain.on('editTrayMslData', async (_, data) => {
+    // TODO: catch之後throw error會有UnhandlePromise的error，不知道怎麼解好，所以先用status判斷
+    try {
+      _.returnValue = {
+        status: 200,
+        data: await tmService.updateData(data)
+      }
+    } catch (error) {
+      console.error(`editTrayMslData Error: ${error}`)
+      _.returnValue = {
+        status: 404,
+        data: `editTrayMslData Error: ${error}`
+      }
+    }
+  })
 }
 
 app.on('ready', createWindow)

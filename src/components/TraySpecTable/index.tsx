@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom"
 import { ITraySpec } from "../../../DB/types/tray_spec"
 import BootstrapTable, { SelectRowProps } from "react-bootstrap-table-next"
 
-const TraySpecTable = forwardRef((props: {mode: string, id: string}, ref) => {
+const TraySpecTable = forwardRef((props: { mode: string, id: string }, ref) => {
   // props
   const mode = props.mode
   const id = props.id
@@ -22,7 +22,7 @@ const TraySpecTable = forwardRef((props: {mode: string, id: string}, ref) => {
   }
 
   // select row
-  const [selected, setSelected] = useState<ITraySpec[]>([])
+  const [selected, setSelected] = useState<ITraySpec>()
   const handleOnSelect = (row, isSelect) => {
     if (isSelect) {
       setSelected(row)
@@ -34,13 +34,15 @@ const TraySpecTable = forwardRef((props: {mode: string, id: string}, ref) => {
     ref,
     () => ({
       updateSelected() {
-        history.push(
-          '/add/tray_msl',
-          {
-            isEdit: true,
-            selectedData: selected
-          }
-        )
+        if (selected) {
+          history.push(
+            '/add/tray_spec',
+            {
+              isEdit: true,
+              selectedData: selected
+            }
+          )
+        }
       }
     }),
   )
@@ -134,7 +136,7 @@ const TraySpecTable = forwardRef((props: {mode: string, id: string}, ref) => {
   }
 
   return (
-    <BootstrapTable keyField="id" data={datas} columns={columns} selectRow={selectRow}/>
+    <BootstrapTable keyField="id" data={datas} columns={columns} selectRow={selectRow} />
   )
 })
 

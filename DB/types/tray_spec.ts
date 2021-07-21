@@ -1,6 +1,5 @@
 
 interface ITraySpec {
-    // id?: string
     custCd: string;
     prodspecId: string;
     custPartId?: string;

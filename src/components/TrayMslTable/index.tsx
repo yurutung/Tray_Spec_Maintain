@@ -18,7 +18,7 @@ const TrayMslTable = forwardRef((props: { mode: string, id: string }, ref) => {
     })
   }
   // select row
-  const [selected, setSelected] = useState<ITrayMsl[]>([])
+  const [selected, setSelected] = useState<ITrayMsl>()
   const handleOnSelect = (row, isSelect) => {
     if (isSelect) {
       setSelected(row)
@@ -30,13 +30,15 @@ const TrayMslTable = forwardRef((props: { mode: string, id: string }, ref) => {
     ref,
     () => ({
       updateSelected() {
-        history.push(
-          '/add/tray_spec',
-          {
-            isEdit: true,
-            selectedData: selected
-          }
-        )
+        if (selected) {
+          history.push(
+            '/add/tray_msl',
+            {
+              isEdit: true,
+              selectedData: selected
+            }
+          )
+        }
       }
     }),
   )

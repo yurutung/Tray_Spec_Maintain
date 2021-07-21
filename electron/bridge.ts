@@ -1,4 +1,5 @@
 import { contextBridge, ipcRenderer } from 'electron'
+import { ITrayMsl } from '../DB/types/tray_msl'
 import { ITraySpec } from '../DB/types/tray_spec'
 
 export const api = {
@@ -33,9 +34,29 @@ export const api = {
     }
   },
   // add tray msl data
-  addTrayMslData: async (data: ITraySpec): Promise<ITraySpec> => {
+  addTrayMslData: async (data: ITrayMsl): Promise<ITrayMsl> => {
     const res = await ipcRenderer.sendSync('addTrayMslData', data)
     if (res.status == 201) {
+      return res.data
+    }
+    else {
+      throw new Error(res.data)
+    }
+  },
+  // edit tray spec data
+  editTraySpecData: async (data: ITrayMsl): Promise<ITrayMsl> => {
+    const res = await ipcRenderer.sendSync('editTraySpecData', data)
+    if (res.status == 200) {
+      return res.data
+    }
+    else {
+      throw new Error(res.data)
+    }
+  },
+  // edit tray msl data
+  editTrayMslData: async (data: ITrayMsl): Promise<ITrayMsl> => {
+    const res = await ipcRenderer.sendSync('editTrayMslData', data)
+    if (res.status == 200) {
       return res.data
     }
     else {
