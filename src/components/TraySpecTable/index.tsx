@@ -1,6 +1,6 @@
 import React, { useEffect, useState, forwardRef, useImperativeHandle } from 'react'
+import { useHistory } from "react-router-dom"
 import { ITraySpec } from "../../../DB/types/tray_spec"
-
 import BootstrapTable, { SelectRowProps } from "react-bootstrap-table-next"
 
 const TraySpecTable = forwardRef((props: {mode: string, id: string}, ref) => {
@@ -29,12 +29,18 @@ const TraySpecTable = forwardRef((props: {mode: string, id: string}, ref) => {
     }
   }
   // get select and send to update page
+  const history = useHistory()
   useImperativeHandle(
     ref,
     () => ({
       updateSelected() {
-        console.log("tsRef")
-        console.log(selected)
+        history.push(
+          '/add/tray_msl',
+          {
+            isEdit: true,
+            selectedData: selected
+          }
+        )
       }
     }),
   )

@@ -11,7 +11,6 @@ const Datas = () => {
   const tsRef = useRef()
   const tmRef = useRef()
   const updateSelected = () => {
-    console.log("select")
     // TODO: define tray_spec, tray_msl
     if (mode == 'tray_spec')
       tsRef.current.updateSelected()
