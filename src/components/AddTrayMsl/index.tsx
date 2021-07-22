@@ -25,7 +25,6 @@ const AddTrayMsl = () => {
   // form submit -> save data
   const saveTrayMsl = (e: React.FormEvent, formData: ITrayMsl | any): void => {
     e.preventDefault()
-    console.log(formData)
     if (isEdit) {
       window.Main.editTrayMslData(formData)
         .then(e => console.log(e))

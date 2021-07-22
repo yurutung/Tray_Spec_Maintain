@@ -39,6 +39,13 @@ const TrayMslTable = forwardRef((props: { mode: string, id: string }, ref) => {
             }
           )
         }
+      },
+      delSelected() {
+        if (selected) {
+          window.Main.delTrayMslData(selected)
+            .then(e => fetchDatas())
+            .catch(err => console.log(err))
+        }
       }
     }),
   )

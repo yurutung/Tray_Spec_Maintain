@@ -116,14 +116,46 @@ async function registerListeners() {
     // TODO: catch之後throw error會有UnhandlePromise的error，不知道怎麼解好，所以先用status判斷
     try {
       _.returnValue = {
-        status: 200,
-        data: await tmService.updateData(data)
+        status: 204,
+        data: await tmService.deleteData(data)
       }
     } catch (error) {
       console.error(`editTrayMslData Error: ${error}`)
       _.returnValue = {
         status: 404,
         data: `editTrayMslData Error: ${error}`
+      }
+    }
+  })
+  // del tray msl data
+  ipcMain.on('delTraySpecData', async (_, data) => {
+    // TODO: catch之後throw error會有UnhandlePromise的error，不知道怎麼解好，所以先用status判斷
+    try {
+      _.returnValue = {
+        status: 204,
+        data: await tsService.deleteData(data)
+      }
+    } catch (error) {
+      console.error(`delTraySpecData Error: ${error}`)
+      _.returnValue = {
+        status: 404,
+        data: `delTraySpecData Error: ${error}`
+      }
+    }
+  })
+  // del tray msl data
+  ipcMain.on('delTrayMslData', async (_, data) => {
+    // TODO: catch之後throw error會有UnhandlePromise的error，不知道怎麼解好，所以先用status判斷
+    try {
+      _.returnValue = {
+        status: 204,
+        data: await tmService.deleteData(data)
+      }
+    } catch (error) {
+      console.error(`delTrayMslData Error: ${error}`)
+      _.returnValue = {
+        status: 404,
+        data: `delTrayMslData Error: ${error}`
       }
     }
   })

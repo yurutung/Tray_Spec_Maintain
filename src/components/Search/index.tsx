@@ -14,7 +14,6 @@ const Search = () => {
 
     const getID = (e: React.FormEvent, id: string): void => {
         e.preventDefault()
-        console.log(id)
         // TODO: define tray_spec, tray_msl
         // TODO: mode in ['tray_spec', 'tray_msl']
         if (['tray_spec', 'tray_msl'].includes(mode)) {

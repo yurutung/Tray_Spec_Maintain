@@ -40,7 +40,6 @@ const AddTraySpec = () => {
   // form submit -> save data
   const saveTraySpec = (e: React.FormEvent, formData: ITraySpec | any): void => {
     e.preventDefault()
-    console.log(formData)
     if (isEdit) {
       window.Main.editTraySpecData(formData)
         .then(e => console.log(e))

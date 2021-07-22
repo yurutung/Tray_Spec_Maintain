@@ -15,7 +15,6 @@ export const api = {
   // get data select by cust_cd or msl
   getData: async (mode: string, id: string): Promise<[]> => {
     const res = await ipcRenderer.sendSync('getData', mode, id)
-    console.log(res)
     if (res.status == 200) {
       return res.data
     }
@@ -44,7 +43,7 @@ export const api = {
     }
   },
   // edit tray spec data
-  editTraySpecData: async (data: ITrayMsl): Promise<ITrayMsl> => {
+  editTraySpecData: async (data: ITraySpec): Promise<ITraySpec> => {
     const res = await ipcRenderer.sendSync('editTraySpecData', data)
     if (res.status == 200) {
       return res.data
@@ -57,6 +56,26 @@ export const api = {
   editTrayMslData: async (data: ITrayMsl): Promise<ITrayMsl> => {
     const res = await ipcRenderer.sendSync('editTrayMslData', data)
     if (res.status == 200) {
+      return res.data
+    }
+    else {
+      throw new Error(res.data)
+    }
+  },
+  // del tray spec data
+  delTraySpecData: async (data: ITraySpec): Promise<ITraySpec> => {
+    const res = await ipcRenderer.sendSync('delTraySpecData', data)
+    if (res.status == 204) {
+      return res.data
+    }
+    else {
+      throw new Error(res.data)
+    }
+  },
+  // del tray msl data
+  delTrayMslData: async (data: ITrayMsl): Promise<ITrayMsl> => {
+    const res = await ipcRenderer.sendSync('delTrayMslData', data)
+    if (res.status == 204) {
       return res.data
     }
     else {

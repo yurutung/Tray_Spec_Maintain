@@ -16,7 +16,13 @@ const Datas = () => {
       tsRef.current.updateSelected()
     else if (mode == 'tray_msl')
       tmRef.current.updateSelected()
-
+  }
+  const delSelected = () => {
+    // TODO: define tray_spec, tray_msl
+    if (mode == 'tray_spec')
+      tsRef.current.delSelected()
+    else if (mode == 'tray_msl')
+      tmRef.current.delSelected()
   }
 
   let table = <div />
@@ -35,7 +41,7 @@ const Datas = () => {
         <Link to="/" className="btn btn-outline-secondary">Home</Link>
         <Link to={`/add/${mode}`} className="btn btn-outline-secondary">新增</Link>
         <button className="btn btn-outline-secondary" onClick={updateSelected}>更新</button>
-        <button className="btn btn-outline-secondary">刪除</button>
+        <button className="btn btn-outline-secondary" onClick={delSelected}>刪除</button>
         <button className="btn btn-outline-secondary">儲存檔案</button>
         <button className="btn btn-outline-secondary">讀取檔案</button>
       </div>
