@@ -1,22 +1,34 @@
 import { Link } from "react-router-dom"
+import ReactShortcut from 'react-shortcut'
 
 const Home = () => {
 
     return (
-        <div className="container h-100">
-            <div className="row h-75">
-                <div className="col-12 d-flex align-items-center justify-content-center">
-                    <div className="row">
-                        {/* TODO: define tray_spec, tray_msl */}
-                        <Link to={`/search/tray_spec`} className="btn btn-outline-info">Customer Spec.</Link>
-                        <Link to={`/search/tray_msl`} className="mt-1 btn btn-outline-info">MSL</Link>
+        <>
+            <div className="container h-100">
+                <div className="row h-75">
+                    <div className="col-12 d-flex align-items-center justify-content-center">
+                        <div className="row">
+                            {/* TODO: define tray_spec, tray_msl */}
+                            <Link to={`/search/tray_spec`} id='tray_spec' className="btn btn-outline-info">F1 Customer Spec.</Link>
+                            <Link to={`/search/tray_msl`} id='tray_msl' className="mt-1 btn btn-outline-info">F2 MSL</Link>
+                        </div>
                     </div>
                 </div>
+                <div className="h-25 g-0 px-5">
+                    <button className="btn btn-outline-secondary">離開</button>
+                </div>
             </div>
-            <div className="h-25 g-0 px-5">
-                <button className="btn btn-outline-secondary">Back</button>
-            </div>
-        </div>
+            <ReactShortcut
+                keys={'f1'}
+                onKeysPressed={() => { document.getElementById('tray_spec').click() }}
+            />
+            <ReactShortcut
+                keys={'f2'}
+                onKeysPressed={() => { document.getElementById('tray_msl').click() }}
+            />
+        </>
+
     )
 }
 

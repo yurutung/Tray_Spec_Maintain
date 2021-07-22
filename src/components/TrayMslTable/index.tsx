@@ -32,7 +32,7 @@ const TrayMslTable = forwardRef((props: { mode: string, id: string }, ref) => {
       updateSelected() {
         if (selected) {
           history.push(
-            '/add/tray_msl',
+            `/add/tray_msl/${id}`,
             {
               isEdit: true,
               selectedData: selected

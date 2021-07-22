@@ -16,8 +16,8 @@ export const App = () => {
         <Route path="/" exact component={Home} />
         <Route path="/search/:mode" component={Search} />
         <Route path="/datas/:mode/:id" component={Datas} />
-        <Route path="/add/tray_spec" component={AddTraySpec} />
-        <Route path="/add/tray_msl" component={AddTrayMsl} />
+        <Route path="/add/tray_spec/:id" component={AddTraySpec} />
+        <Route path="/add/tray_msl/:id" component={AddTrayMsl} />
         <Route render={() => <Redirect to="/" />} />
       </MemoryRouter>
     </>

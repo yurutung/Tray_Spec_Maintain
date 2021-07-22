@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { ITrayMsl } from '../../../DB/types/tray_msl'
-import { Link, useLocation } from "react-router-dom"
+import { Link, useParams, useLocation } from "react-router-dom"
+import ReactShortcut from 'react-shortcut'
 
 const AddTrayMsl = () => {
+  const { id } = useParams<{ id: string }>()
+
   const location = useLocation()
   const state = location.state || {}
   const isEdit = state.isEdit || false
@@ -27,38 +30,52 @@ const AddTrayMsl = () => {
     e.preventDefault()
     if (isEdit) {
       window.Main.editTrayMslData(formData)
-        .then(e => console.log(e))
+        .then(e => {
+          console.log(e)
+          document.getElementById('back').click()
+        })
         .catch(err => console.log(err))
     } else {
       window.Main.addTrayMslData(formData)
-        .then(e => console.log(e))
+        .then(e => {
+          console.log(e)
+          document.getElementById('back').click()
+        })
         .catch(err => console.log(err))
     }
   }
 
   return (
-    <form className="container h-100" onSubmit={e => saveTrayMsl(e, formData)}>
-      <div className="h-75 pt-2 col-12">
-        <div className='d-flex align-items-center col-12'>
-          <label className="col-3" htmlFor="msl">MSL ID</label>
-          <div className="col-9">
-            <input className="form-control" onChange={handleForm} type="text" id="msl" value={formData.msl || ''} required disabled={isEdit} />
+    <>
+      <form className="container h-100" onSubmit={e => saveTrayMsl(e, formData)}>
+        <div className="h-75 pt-2 col-12">
+          <div className='d-flex align-items-center col-12'>
+            <label className="col-3" htmlFor="msl">MSL ID</label>
+            <div className="col-9">
+              <input className="form-control" onChange={handleForm} type="text" id="msl" value={formData.msl || ''} required disabled={isEdit} />
+            </div>
+          </div>
+          <div className='d-flex align-items-center col-12'>
+            <label className="col-3" htmlFor="floorLife">Floor Life</label>
+            <div className="col-9">
+              <input className="form-control" onChange={handleForm} type="text" id="floorLife" value={formData.floorLife || ''} />
+            </div>
           </div>
         </div>
-        <div className='d-flex align-items-center col-12'>
-          <label className="col-3" htmlFor="floorLife">Floor Life</label>
-          <div className="col-9">
-            <input className="form-control" onChange={handleForm} type="text" id="floorLife" value={formData.floorLife || ''} />
-          </div>
+        <div className="h-25 g-0 px-5">
+          <Link to={`/datas/tray_msl/${id}`} id='back' className="btn btn-outline-secondary">F3 離開</Link>
+          <button type="submit" id='save' className="btn btn-outline-secondary">F5 確認</button>
         </div>
-      </div>
-      <div className="h-25 g-0 px-5">
-        <Link to="/" className="btn btn-outline-secondary">Home</Link>
-        {/* <button className="btn btn-outline-secondary">離開</button> */}
-        <button className="btn btn-outline-secondary">Fill Laser Mark</button>
-        <button type="submit" className="btn btn-outline-secondary">確認</button>
-      </div>
-    </form>
+      </form>
+      <ReactShortcut
+        keys={'f3'}
+        onKeysPressed={() => { document.getElementById('back').click() }}
+      />
+      <ReactShortcut
+        keys={'f5'}
+        onKeysPressed={() => { document.getElementById('save').click() }}
+      />
+    </>
   )
 }
 

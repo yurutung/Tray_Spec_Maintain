@@ -116,8 +116,8 @@ async function registerListeners() {
     // TODO: catch之後throw error會有UnhandlePromise的error，不知道怎麼解好，所以先用status判斷
     try {
       _.returnValue = {
-        status: 204,
-        data: await tmService.deleteData(data)
+        status: 200,
+        data: await tmService.updateData(data)
       }
     } catch (error) {
       console.error(`editTrayMslData Error: ${error}`)

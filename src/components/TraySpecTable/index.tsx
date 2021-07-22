@@ -36,7 +36,7 @@ const TraySpecTable = forwardRef((props: { mode: string, id: string }, ref) => {
       updateSelected() {
         if (selected) {
           history.push(
-            '/add/tray_spec',
+            `/add/tray_spec/${id}`,
             {
               isEdit: true,
               selectedData: selected
