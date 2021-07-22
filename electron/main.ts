@@ -1,18 +1,20 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
+import * as dotEnv from 'dotenv'
+import { establishConnection, services } from '../DB'
 
 let mainWindow: BrowserWindow | null
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string
 
-import { establishConnection, services } from '../DB'
+dotEnv.config()
 
 function createWindow() {
 
   mainWindow = new BrowserWindow({
     // icon: path.join(assetsPath, 'assets', 'icon.png'),
-    width: 1100,
-    height: 700,
+    width: Number(process.env.WINDOWS_HEIGHT) || 1100,
+    height: Number(process.env.WINDOWS_WIDTH) || 700,
     // backgroundColor: '#191622',
     webPreferences: {
       nodeIntegration: false,
@@ -23,7 +25,10 @@ function createWindow() {
 
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY)
 
-  mainWindow.webContents.openDevTools();
+  // Open the DevTools.
+  if (process.env.ENV == "dev") {
+    mainWindow.webContents.openDevTools()
+  }
 
   mainWindow.on('closed', () => {
     mainWindow = null
