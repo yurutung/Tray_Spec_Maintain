@@ -24,21 +24,21 @@ const Search = () => {
     return (
         <>
             <form className="h-100" onSubmit={e => getID(e, id)}>
-                <div className="row h-75 g-0">
+                <div className="row main-body g-0">
                     <div className="d-flex align-items-center justify-content-center">
                         <div className="row col-8">
-                            <div className="col-3">
+                            <div className="col-2">
                                 <label htmlFor="id" className="col-form-label row justify-content-end">{mode == 'tray_spec' ? 'Cust. Code' : 'MSL ID'}</label>
                             </div>
-                            <div className="col-9">
+                            <div className="col-10">
                                 <input onChange={handleForm} type="text" id="id" className="form-control" required />
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="h-25 g-0 px-5">
-                    <Link to="/" id='home' className="btn btn-outline-secondary">F3 離開</Link>
-                    <button type="submit" className="btn btn-primary" disabled={id === '' ? true : false}>Enter 確認</button>
+                <div className="gap-2 p-2 row g-0">
+                    <Link to="/" id='home' className="btn btn-outline-secondary col-2">F3 離開</Link>
+                    <button type="submit" className="btn btn-primary col-2" disabled={id === '' ? true : false}>Enter 確認</button>
                 </div>
             </form>
             <ReactShortcut

@@ -36,16 +36,16 @@ const Datas = () => {
   return (
     <>
       <div className="container h-100">
-        <div className="row h-75 pt-2">
+        <div className="main-body" >
           {table}
         </div>
-        <div className="h-25 g-0 px-5">
-          <Link to={`/search/${mode}`} id='search' className="btn btn-outline-secondary">F3 離開</Link>
-          <Link to={`/add/${mode}/${id}`} id='add' className="btn btn-outline-secondary">F1 新增</Link>
-          <button className="btn btn-outline-secondary" id='edit' onClick={updateSelected}>F2 更新</button>
-          <button className="btn btn-outline-secondary" id='del' onClick={delSelected}>F4 刪除</button>
-          <button className="btn btn-outline-secondary">儲存檔案</button>
-          <button className="btn btn-outline-secondary">讀取檔案</button>
+        <div className="gap-2 p-2 row">
+          <Link to={`/search/${mode}`} id='search' className="btn btn-outline-secondary col">F3 離開</Link>
+          <Link to={`/add/${mode}/${id}`} id='add' className="btn btn-outline-secondary col">F1 新增</Link>
+          <button className="btn btn-outline-secondary col" id='edit' onClick={updateSelected}>F2 更新</button>
+          <button className="btn btn-outline-secondary col" id='del' onClick={delSelected}>F4 刪除</button>
+          <button className="btn btn-outline-secondary col">儲存檔案</button>
+          <button className="btn btn-outline-secondary col">讀取檔案</button>
         </div>
       </div>
       <ReactShortcut

@@ -48,23 +48,23 @@ const AddTrayMsl = () => {
   return (
     <>
       <form className="container h-100" onSubmit={e => saveTrayMsl(e, formData)}>
-        <div className="h-75 pt-2 col-12">
-          <div className='d-flex align-items-center col-12'>
+        <div className="main-body pt-2">
+          <div className='d-flex align-items-center col-12 my-2'>
             <label className="col-3" htmlFor="msl">MSL ID</label>
             <div className="col-9">
               <input className="form-control" onChange={handleForm} type="text" id="msl" value={formData.msl || ''} required disabled={isEdit} />
             </div>
           </div>
-          <div className='d-flex align-items-center col-12'>
+          <div className='d-flex align-items-center col-12 my-2'>
             <label className="col-3" htmlFor="floorLife">Floor Life</label>
             <div className="col-9">
               <input className="form-control" onChange={handleForm} type="text" id="floorLife" value={formData.floorLife || ''} />
             </div>
           </div>
         </div>
-        <div className="h-25 g-0 px-5">
-          <Link to={`/datas/tray_msl/${id}`} id='back' className="btn btn-outline-secondary">F3 離開</Link>
-          <button type="submit" id='save' className="btn btn-outline-secondary">F5 確認</button>
+        <div className="gap-2 p-2 row">
+          <Link to={`/datas/tray_msl/${id}`} id='back' className="btn btn-outline-secondary col-2">F3 離開</Link>
+          <button type="submit" id='save' className="btn btn-outline-secondary col-2">F5 確認</button>
         </div>
       </form>
       <ReactShortcut

@@ -6,7 +6,7 @@ const Home = () => {
     return (
         <>
             <div className="container h-100">
-                <div className="row h-75">
+                <div className="row main-body">
                     <div className="col-12 d-flex align-items-center justify-content-center">
                         <div className="row">
                             {/* TODO: define tray_spec, tray_msl */}
@@ -15,8 +15,8 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-                <div className="h-25 g-0 px-5">
-                    <button className="btn btn-outline-secondary">離開</button>
+                <div className="gap-2 p-2 row">
+                    <button className="btn btn-outline-secondary col-2">離開</button>
                 </div>
             </div>
             <ReactShortcut
