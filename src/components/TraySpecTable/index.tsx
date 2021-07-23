@@ -2,6 +2,7 @@ import React, { useEffect, useState, forwardRef, useImperativeHandle } from 'rea
 import { useHistory } from "react-router-dom"
 import { ITraySpec } from "../../../DB/types/tray_spec"
 import BootstrapTable, { SelectRowProps } from "react-bootstrap-table-next"
+import { toastMixin } from '../functions'
 
 const TraySpecTable = forwardRef((props: { mode: string, id: string }, ref) => {
   // props
@@ -43,12 +44,23 @@ const TraySpecTable = forwardRef((props: { mode: string, id: string }, ref) => {
             }
           )
         }
-      }, 
+      },
       delSelected() {
         if (selected) {
           window.Main.delTraySpecData(selected)
-          .then(e => fetchDatas())
-          .catch(err => console.log(err))
+            .then(e => {
+              toastMixin.fire({
+                title: 'Delete data Successfully!'
+              })
+              fetchDatas()
+            })
+            .catch(err => {
+              console.log(err)
+              toastMixin.fire({
+                title: err,
+                icon: 'error'
+              })
+            })
         }
       }
     }),

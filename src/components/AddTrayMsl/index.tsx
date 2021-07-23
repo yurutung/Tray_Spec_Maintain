@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { ITrayMsl } from '../../../DB/types/tray_msl'
 import { Link, useParams, useLocation } from "react-router-dom"
 import ReactShortcut from 'react-shortcut'
+import { toastMixin, clickById } from '../functions'
 
 const AddTrayMsl = () => {
   const { id } = useParams<{ id: string }>()
@@ -32,16 +33,34 @@ const AddTrayMsl = () => {
       window.Main.editTrayMslData(formData)
         .then(e => {
           console.log(e)
-          document.getElementById('back').click()
+          toastMixin.fire({
+            title: 'Update data Successfully!'
+          })
+          clickById('back')
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          console.log(err)
+          toastMixin.fire({
+            title: err,
+            icon: 'error'
+          })
+        })
     } else {
       window.Main.addTrayMslData(formData)
         .then(e => {
           console.log(e)
-          document.getElementById('back').click()
+          toastMixin.fire({
+            title: 'Add data Successfully!'
+          })
+          clickById('back')
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          console.log(err)
+          toastMixin.fire({
+            title: err,
+            icon: 'error'
+          })
+        })
     }
   }
 
@@ -69,11 +88,11 @@ const AddTrayMsl = () => {
       </form>
       <ReactShortcut
         keys={'f3'}
-        onKeysPressed={() => { document.getElementById('back').click() }}
+        onKeysPressed={() => { clickById('back')}}
       />
       <ReactShortcut
         keys={'f5'}
-        onKeysPressed={() => { document.getElementById('save').click() }}
+        onKeysPressed={() => { clickById('save') }}
       />
     </>
   )

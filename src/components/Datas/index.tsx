@@ -1,6 +1,7 @@
 import { useRef } from "react"
 import { Link, useParams } from "react-router-dom"
 import ReactShortcut from 'react-shortcut'
+import { clickById } from '../functions'
 
 import TrayMslTable from "../TrayMslTable"
 import TraySpecTable from "../TraySpecTable"
@@ -50,19 +51,19 @@ const Datas = () => {
       </div>
       <ReactShortcut
         keys={'f3'}
-        onKeysPressed={() => { document.getElementById('search').click() }}
+        onKeysPressed={() => { clickById('search') }}
       />
       <ReactShortcut
         keys={'f1'}
-        onKeysPressed={() => { document.getElementById('add').click() }}
+        onKeysPressed={() => { clickById('add') }}
       />
       <ReactShortcut
         keys={'f2'}
-        onKeysPressed={() => { document.getElementById('edit').click() }}
+        onKeysPressed={() => { clickById('edit') }}
       />
       <ReactShortcut
         keys={'f4'}
-        onKeysPressed={() => { document.getElementById('del').click() }}
+        onKeysPressed={() => { clickById('del') }}
       />
     </>
   )

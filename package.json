@@ -30,7 +30,8 @@
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.6.5",
     "sequelize-typescript": "^2.1.0",
-    "styled-components": "5.3.0"
+    "styled-components": "5.3.0",
+    "sweetalert2": "^11.0.19"
   },
   "devDependencies": {
     "@babel/core": "7.14.6",

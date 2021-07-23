@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { ITraySpec } from '../../../DB/types/tray_spec'
 import { Link, useParams, useLocation } from "react-router-dom"
 import ReactShortcut from 'react-shortcut'
+import { toastMixin, clickById } from '../functions'
 
 const AddTraySpec = () => {
   const { id } = useParams<{ id: string }>()
@@ -47,16 +48,34 @@ const AddTraySpec = () => {
       window.Main.editTraySpecData(formData)
         .then(e => {
           console.log(e)
-          document.getElementById('back').click()
+          toastMixin.fire({
+            title: 'Update data Successfully!'
+          })
+          clickById('back')
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          console.log(err)
+          toastMixin.fire({
+            title: err,
+            icon: 'error'
+          })
+        })
     } else {
       window.Main.addTraySpecData(formData)
         .then(e => {
           console.log(e)
-          document.getElementById('back').click()
+          toastMixin.fire({
+            title: 'Add data Successfully!'
+          })
+          clickById('back')
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          console.log(err)
+          toastMixin.fire({
+            title: err,
+            icon: 'error'
+          })
+        })
     }
   }
 
@@ -131,11 +150,11 @@ const AddTraySpec = () => {
       </form>
       <ReactShortcut
         keys={'f3'}
-        onKeysPressed={() => { document.getElementById('back').click() }}
+        onKeysPressed={() => { clickById('back') }}
       />
       <ReactShortcut
         keys={'f5'}
-        onKeysPressed={() => { document.getElementById('save').click() }}
+        onKeysPressed={() => { clickById('save') }}
       />
     </>
   )
